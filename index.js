@@ -11,13 +11,14 @@ app.set("view engine", "ejs");
 
 
 app.get("/", (req, res) => {  
-  res.render("home", {resultItems: recipes, calories: calories});
+  res.render("home", {resultItems: recipes});
+  chunks = [];
+  recipes = [];
 });
 let searchCount = 0;
 let chunks = [];
 let recipes = [];
-const weight = [];
-const calories = [];
+
 app.post("/", (req, res) => {
   searchCount++;
   const query = req.body.query;
@@ -35,11 +36,7 @@ app.post("/", (req, res) => {
         recipes.push(element.recipe);
       });
       // at this point recipes will be complete
-      
-      
-      recipes.forEach(kcal => {
-        calories.push(Math.round(kcal.calories * 100) / 100).toFixed(2);
-      })
+
       if(recipes[recipes.length - 1] === undefined && searchCount >= 1) {
         res.render("error", {query:query}); 
         chunks = [];
