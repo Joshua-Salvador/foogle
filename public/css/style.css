@@ -1,0 +1,14 @@
+body {
+  margin: auto;
+  text-align: center;
+}
+
+.navbar-brand {
+  font-size: 5rem;
+}
+.form {
+  padding-top: 50px;
+}
+.info {
+  text-align: left;
+}

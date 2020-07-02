@@ -1,0 +1,41 @@
+<%- include("partials/header") -%> 
+
+  <div class="search-results">
+    <% resultItems.forEach((item) => { %>
+      <div class="container">
+        <div class="row bg-primary" style="margin: 10px; border-radius: 5px; padding: 1rem">
+          <div class="col-lg-6">
+            <div class="card text-white bg-primary mb-3" style="width: 18rem;">
+              <div class="card-header"><%= item.label %></div>
+              <img src="<%= item.image %>" class="card-img-top" >
+            </div>
+          </div>
+          <div class="col-lg-6 text-white info">
+            <h3>Info:</h3>
+            <h5>Source: <%= item.source %> </h5>
+            <p>Check this at: <a href="<%= item.url %> " target="_blank"><%= item.url %> </a></p>    
+            <% let calorie = (Math.round(item.calories*100)/100).toFixed(2) %> 
+            <% let weight = (Math.round(item.totalWeight*100)/100).toFixed(2) %> 
+            <% let ingredients = item.ingredients %> 
+            <p>Calories: <%= calorie%> kcal  </p> 
+            <p>Weight: <%= weight %>g </p>
+            <h4>Ingredients:</h4>
+            <ul>
+            <% ingredients.forEach(ingredient => { %>
+              <li>
+                <% if(ingredient.weight === 0.00) { %>
+                  <% ingredient.weight = null %>
+                <% } else { %>
+                  <% ingredient.weight = (Math.round(ingredient.weight*100)/100).toFixed(2) + "g"%>
+                <% } %> 
+                <p><%= ingredient.text %> </p>
+                <p><%= ingredient.weight %></p>
+              </li>
+            <% }) %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <% }) %>  
+
+  </div>
