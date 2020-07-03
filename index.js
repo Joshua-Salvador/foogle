@@ -22,7 +22,13 @@ let recipes = [];
 app.post("/", (req, res) => {
   searchCount++;
   const query = req.body.query;
-  const url = "https://api.edamam.com/search?q=" + query + "&app_id=49bb64d6&app_key=690efc729296d5671753022db574e8e4&from=0&to=100";
+  let minCaloriesQuery = req.body.minCaloriesQuery.toString();
+  let maxCaloriesQuery = req.body.maxCaloriesQuery.toString();
+  if (minCaloriesQuery === "" && maxCaloriesQuery === "") {
+    minCaloriesQuery = "0";
+    maxCaloriesQuery = "10000";
+  }
+  const url = `https://api.edamam.com/search?q=${query}&app_id=49bb64d6&app_key=690efc729296d5671753022db574e8e4&from=0&to=100`;
   https.get(url, (response) => {
     response.on("data", (data) => {
       chunks.push(data);
@@ -31,8 +37,9 @@ app.post("/", (req, res) => {
       
       const queryData = data;
       const jsonQueryData = JSON.parse(queryData); //object is parsed
-      const jsonQueryDataResults = jsonQueryData.hits; //array object
+      const jsonQueryDataResults = jsonQueryData.hits; //array object, hits
       jsonQueryDataResults.forEach(element => {
+        if(element.recipe.calories < minCaloriesQuery || element.recipe.calories > maxCaloriesQuery) return
         recipes.push(element.recipe);
       });
       // at this point recipes will be complete
@@ -44,6 +51,7 @@ app.post("/", (req, res) => {
         labels = [];
         return
       }
+      console.log(res.statusCode);
       res.redirect("/");
     })
   })

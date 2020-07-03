@@ -16,3 +16,7 @@ body {
 .info {
   text-align: left;
 }
+.extra-input {
+  padding: 20px;
+  margin: 10px auto;
+}

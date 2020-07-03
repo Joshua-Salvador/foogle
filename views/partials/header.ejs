@@ -7,6 +7,10 @@
   <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
   <link rel="stylesheet" href="css/style.css">
 
+
+  <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+
+
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous" defer></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous" defer></script>
@@ -23,10 +27,14 @@
 <div class="flex-grow-1 d-flex form">
   <form class="form-inline my-2 my-lg-0 mx-0 mx-sm-auto" action="/" method="POST">
     <div class="col-sm-12">
-       <input class="form-control mr-sm-2" type="text" name="query" placeholder="Search">     
-       <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+       <input class="form-control mr-sm-2" type="text" name="query" placeholder="Search">  
     </div>
-
+    <div class="extra-input bg-primary col-sm-12 text-white">
+      <h5>(Optional) Calories: </h5>
+      <input class="form-control mr-sm-2" type="number" name="minCaloriesQuery" placeholder="Min. Calories in kcal">
+      <input class="form-control mr-sm-2" type="number" name="maxCaloriesQuery" placeholder="Max. Calories in kcal">
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+    </div>
   </form>
 </div>
     
