@@ -24,11 +24,16 @@ app.post("/", (req, res) => {
   const query = req.body.query;
   let minCaloriesQuery = req.body.minCaloriesQuery.toString();
   let maxCaloriesQuery = req.body.maxCaloriesQuery.toString();
+  let diet = req.body.diet;
+  let health = req.body.health;
+  console.log(diet)
+  console.log(health)
   if (minCaloriesQuery === "" && maxCaloriesQuery === "") {
     minCaloriesQuery = "0";
     maxCaloriesQuery = "10000";
   }
-  const url = `https://api.edamam.com/search?q=${query}&app_id=49bb64d6&app_key=690efc729296d5671753022db574e8e4&from=0&to=100`;
+  let url = diet !== "any" ? `https://api.edamam.com/search?q=${query}&app_id=49bb64d6&app_key=690efc729296d5671753022db574e8e4&diet=${diet}&from=0&to=100`: `https://api.edamam.com/search?q=${query}&app_id=49bb64d6&app_key=690efc729296d5671753022db574e8e4&from=0&to=100`;
+  url = health !== "any" ? url + `&health=${health}`: url;
   https.get(url, (response) => {
     response.on("data", (data) => {
       chunks.push(data);
@@ -38,6 +43,7 @@ app.post("/", (req, res) => {
       const queryData = data;
       const jsonQueryData = JSON.parse(queryData); //object is parsed
       const jsonQueryDataResults = jsonQueryData.hits; //array object, hits
+      //There's something wrong with the parameters for calories
       jsonQueryDataResults.forEach(element => {
         if(element.recipe.calories < minCaloriesQuery || element.recipe.calories > maxCaloriesQuery) return
         recipes.push(element.recipe);

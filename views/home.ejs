@@ -17,8 +17,12 @@
             <% let calorie = (Math.round(item.calories*100)/100).toFixed(2) %> 
             <% let weight = (Math.round(item.totalWeight*100)/100).toFixed(2) %> 
             <% let ingredients = item.ingredients %> 
+            <% let dietType = item.dietLabels %> 
+            <% let healthLabel = item.healthLabels %> 
             <p>Calories: <%= calorie%> kcal  </p> 
             <p>Weight: <%= weight %>g </p>
+            <p>Diet Type: <%= dietType %> </p>
+            <p>Health Label: <%= healthLabel %> </p>
             <h4>Ingredients:</h4>
             <ul>
             <% ingredients.forEach(ingredient => { %>
@@ -37,5 +41,5 @@
         </div>
       </div>
     <% }) %>  
-
   </div>
+  <%- include("partials/footer") -%> 
