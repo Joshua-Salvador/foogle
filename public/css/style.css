@@ -46,3 +46,13 @@ footer {
   padding: 100px;
   margin-top: 100px;
 }
+
+@media(max-width: 995px){
+  .ad {
+    display: block;
+    margin: auto;
+  }
+  .attribution {
+    display: block;
+  }
+}
